@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 
 import './add-ticket-form.style.css'
 
-export const AddTicketForm = ({
+const AddTicketForm = ({
   handleOnSubmit,
   handleOnChange,
-  formDataError,
-  formData,
+  frmDataErro,
+  frmDt,
 }) => {
-  console.log(formData)
+  console.log(frmDt)
   return (
     <Card className='mt-3 add-new-ticket bg-light'>
       <Card.Body>
@@ -24,7 +24,7 @@ export const AddTicketForm = ({
             <Col sm={9}>
               <Form.Control
                 name='subject'
-                value={formData.subject}
+                value={frmDt.subject}
                 // minLength="3"
                 maxLength='100'
                 onChange={handleOnChange}
@@ -32,7 +32,7 @@ export const AddTicketForm = ({
                 required
               />
               <Form.Text className='text-danger'>
-                {formDataError.subject && 'SUbject is required!'}
+                {frmDataErro.subject && 'SUbject is required!'}
               </Form.Text>
             </Col>
           </Form.Group>
@@ -44,7 +44,7 @@ export const AddTicketForm = ({
               <Form.Control
                 type='date'
                 name='issueDate'
-                value={formData.issueDate}
+                value={frmDt.issueDate}
                 onChange={handleOnChange}
                 required
               />
@@ -56,13 +56,13 @@ export const AddTicketForm = ({
               as='textarea'
               name='detail'
               rows='5'
-              value={formData.detail}
+              value={frmDt.detail}
               onChange={handleOnChange}
               required
             />
           </Form.Group>
 
-          <Button type='submit' variant='info' block>
+          <Button type='submit' variant='info'>
             Login
           </Button>
         </Form>
@@ -74,6 +74,8 @@ export const AddTicketForm = ({
 AddTicketForm.propTypes = {
   handleOnSubmit: PropTypes.func.isRequired,
   handleOnChange: PropTypes.func.isRequired,
-  formData: PropTypes.object.isRequired,
-  formDataError: PropTypes.object.isRequired,
+  frmDt: PropTypes.object.isRequired,
+  frmDataErro: PropTypes.object.isRequired,
 }
+
+export default AddTicketForm

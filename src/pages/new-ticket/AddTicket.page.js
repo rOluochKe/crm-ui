@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import PageBreadcrumb from '../../components/breadcrumb/Breadcrumb.component'
-import { AddTicketForm } from '../../add-ticket-form/AddTicketForm.component'
+import AddTicketForm from '../../components/add-ticket-form/AddTicketForm.component'
 
 import { shortText } from '../../utils/validation'
 
-const initialFormData = {
+const initialFrmDt = {
   subject: '',
   issueDate: '',
   detail: '',
 }
 
-const initialFormError = {
+const initialFrmError = {
   subject: false,
   issueDate: false,
   detail: false,
 }
-
 const AddTicket = () => {
-  const [formData, setFormData] = useState(initialFormData)
-  const [formDataError, setFormDataError] = useState(initialFormError)
+  const [frmData, setFrmData] = useState(initialFrmDt)
+  const [frmDataErro, setFrmDataErro] = useState(initialFrmError)
 
-  useEffect(() => {}, [formData, formDataError])
+  useEffect(() => {}, [frmData, frmDataErro])
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
 
-    setFormData({
-      ...formData,
+    setFrmData({
+      ...frmData,
       [name]: value,
     })
   }
@@ -35,16 +34,16 @@ const AddTicket = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault()
 
-    setFormDataError(initialFormError)
+    setFrmDataErro(initialFrmError)
 
-    const isSubjectValid = await shortText(formData.subject)
+    const isSubjectValid = await shortText(frmData.subject)
 
-    setFormDataError({
-      ...initialFormError,
+    setFrmDataErro({
+      ...initialFrmError,
       subject: !isSubjectValid,
     })
 
-    console.log('Form submit request received', formData)
+    console.log('Form submit request received', frmData)
   }
 
   return (
@@ -60,8 +59,8 @@ const AddTicket = () => {
           <AddTicketForm
             handleOnChange={handleOnChange}
             handleOnSubmit={handleOnSubmit}
-            formData={formData}
-            formDataError={formDataError}
+            frmDt={frmData}
+            frmDataErro={frmDataErro}
           />
         </Col>
       </Row>
