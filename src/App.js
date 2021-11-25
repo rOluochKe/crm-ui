@@ -2,7 +2,8 @@ import React from 'react'
 import './App.css'
 import DefaultLayout from './layout/Default.layout'
 
-import TicketLists from './pages/ticket-list/TicketLists.page'
+import Ticket from './pages/ticket/Ticket.page'
+// import TicketLists from './pages/ticket-list/TicketLists.page'
 // import Dashboard from './pages/dashboard/Dashboard.page'
 
 // import Entry from './pages/entry/Entry.page'
@@ -15,7 +16,8 @@ const App = () => {
       <DefaultLayout>
         {/* <Dashboard /> */}
         {/* <AddTicket /> */}
-        <TicketLists />
+        {/* <TicketLists /> */}
+        <Ticket />
       </DefaultLayout>
     </div>
   )
