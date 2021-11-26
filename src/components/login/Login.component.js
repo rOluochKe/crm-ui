@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   Container,
@@ -25,6 +25,10 @@ const LoginForm = ({ formSwitcher }) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    sessionStorage.getItem('accessJWT') && history.push('/dashboard')
+  }, [history, isAuth])
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
