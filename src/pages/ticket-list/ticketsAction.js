@@ -18,6 +18,7 @@ import {
   getAllTickets,
   getSingleTicket,
   updateReplyTicket,
+  updateTicketStatusClosed,
 } from '../../api/ticketApi'
 
 export const fetchAllTickets = () => async (dispatch) => {

@@ -13,9 +13,8 @@ const Ticket = () => {
   const { tId } = useParams()
   const dispatch = useDispatch()
 
-  const { isLoading, error, selectedTicket } = useSelector(
-    (state) => state.tickets
-  )
+  const { isLoading, error, selectedTicket, replyMsg, replyTicketError } =
+    useSelector((state) => state.tickets)
 
   useEffect(() => {
     dispatch(fetchSingleTicket(tId))
