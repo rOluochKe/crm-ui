@@ -7,7 +7,7 @@ import MessageHistory from '../../components/message-history/MessageHistory.comp
 import UpdateTicket from '../../components/update-ticket/UpdateTicket.component'
 
 // const ticket = tickets[0];
-import { fetchSingleTicket } from '../ticket-list/ticketsAction'
+import { fetchSingleTicket, closeTicket } from '../ticket-list/ticketsAction'
 
 const Ticket = () => {
   const { tId } = useParams()
@@ -17,12 +17,9 @@ const Ticket = () => {
     (state) => state.tickets
   )
 
-  const [message, setMessage] = useState('')
-  const [ticket, setTicket] = useState('')
-
   useEffect(() => {
     dispatch(fetchSingleTicket(tId))
-  }, [message, tId, dispatch])
+  }, [tId, dispatch])
 
   return (
     <Container>
@@ -35,6 +32,7 @@ const Ticket = () => {
         <Col>
           {isLoading && <Spinner variant='primary' animation='border' />}
           {error && <Alert variant='danger'>{error}</Alert>}
+          {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
         </Col>
       </Row>
       <Row>
@@ -48,7 +46,13 @@ const Ticket = () => {
           <div className='status'>Status: {selectedTicket.status}</div>
         </Col>
         <Col className='text-right'>
-          <Button variant='outline-info'>Close Ticket</Button>
+          <Button
+            variant='outline-info'
+            onClick={() => dispatch(closeTicket(tId))}
+            disabled={selectedTicket.status === 'Closed'}
+          >
+            Close Ticket
+          </Button>
         </Col>
       </Row>
       <Row className='mt-4'>

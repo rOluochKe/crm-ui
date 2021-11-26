@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
@@ -6,7 +6,6 @@ import { Form, Button } from 'react-bootstrap'
 import { replyOnTicket } from '../../pages/ticket-list/ticketsAction'
 
 const UpdateTicket = ({ _id }) => {
-  const { replyMsg } = useSelector((state) => state.tickets)
   const dispatch = useDispatch()
   const {
     user: { name },
