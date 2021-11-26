@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
+import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.comp'
+import { MessageHistory } from '../../components/message-history/MessageHistory.comp'
+import { UpdateTicket } from '../../components/update-ticket/UpdateTicket.comp'
 import { useParams } from 'react-router-dom'
-import PageBreadcrumb from '../../components/breadcrumb/Breadcrumb.component'
-import MessageHistory from '../../components/message-history/MessageHistory.component'
-import UpdateTicket from '../../components/update-ticket/UpdateTicket.component'
 
-// const ticket = tickets[0];
 import { fetchSingleTicket, closeTicket } from '../ticket-list/ticketsAction'
 import { resetResponseMsg } from '../ticket-list/ticketsSlice'
 
@@ -31,6 +30,7 @@ const Ticket = () => {
           <PageBreadcrumb page='Ticket' />
         </Col>
       </Row>
+
       <Row>
         <Col>
           {isLoading && <Spinner variant='primary' animation='border' />}

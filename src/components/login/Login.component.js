@@ -9,9 +9,8 @@ import {
   Spinner,
   Alert,
 } from 'react-bootstrap'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { loginPending, loginSuccess, loginFail } from './loginSlice'
 import { userLogin } from '../../api/userApi'
@@ -20,15 +19,17 @@ import { getUserProfile } from '../../pages/dashboard/userAction'
 const LoginForm = ({ formSwitcher }) => {
   const dispatch = useDispatch()
   const history = useHistory()
+  let location = useLocation()
 
   const { isLoading, isAuth, error } = useSelector((state) => state.login)
+  let { from } = location.state || { from: { pathname: '/' } }
 
   useEffect(() => {
-    sessionStorage.getItem('accessJWT') && history.push('/dashboard')
+    sessionStorage.getItem('accessJWT') && history.replace(from)
   }, [history, isAuth])
 
   const [email, setEmail] = useState('e2@e.com')
-  const [password, setPassword] = useState('password')
+  const [password, setPassword] = useState('password#1F')
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
@@ -86,24 +87,29 @@ const LoginForm = ({ formSwitcher }) => {
                 name='email'
                 value={email}
                 onChange={handleOnChange}
-                placeholder='Enter email'
-                required
-              />
-              <Form.Control
-                type='password'
-                name='password'
-                value={password}
-                onChange={handleOnChange}
-                placeholder='Type password'
+                placeholder='Enter Email'
                 required
               />
             </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                name='password'
+                onChange={handleOnChange}
+                value={password}
+                placeholder='password'
+                required
+              />
+            </Form.Group>
+
             <Button type='submit'>Login</Button>
             {isLoading && <Spinner variant='primary' animation='border' />}
           </Form>
           <hr />
         </Col>
       </Row>
+
       <Row>
         <Col>
           <a href='/password-reset'>Forget Password?</a>

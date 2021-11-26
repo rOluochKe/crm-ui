@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
-
 import { loginSuccess } from '../login/loginSlice'
 import { getUserProfile } from '../../pages/dashboard/userAction'
 
 import { fetchNewAccessJWT } from '../../api/userApi'
 
-import DefaultLayout from '../../layout/Default.layout'
+import { DefaultLayout } from '../../layout/DefaultLayout'
 
-const isAuth = true
-
-const PrivateRoute = ({ children, ...rest }) => {
+export const PrivateRoute = ({ children, ...rest }) => {
   const dispatch = useDispatch()
   const { isAuth } = useSelector((state) => state.login)
   const { user } = useSelector((state) => state.user)
@@ -34,11 +31,18 @@ const PrivateRoute = ({ children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() =>
-        isAuth ? <DefaultLayout>{children}</DefaultLayout> : <Redirect to='/' />
+      render={({ location }) =>
+        isAuth ? (
+          <DefaultLayout>{children}</DefaultLayout>
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: location },
+            }}
+          />
+        )
       }
     />
   )
 }
-
-export default PrivateRoute
