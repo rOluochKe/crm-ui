@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom'
 
 import { loginPending, loginSuccess, loginFail } from './loginSlice'
 import { userLogin } from '../../api/userApi'
+import { getUserProfile } from '../../pages/dashboard/userAction'
 
 const LoginForm = ({ formSwitcher }) => {
   const dispatch = useDispatch()
@@ -60,6 +61,7 @@ const LoginForm = ({ formSwitcher }) => {
       }
 
       dispatch(loginSuccess())
+      dispatch(getUserProfile())
       history.push('/dashboard')
     } catch (error) {
       dispatch(loginFail(error.message))
