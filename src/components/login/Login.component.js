@@ -23,12 +23,12 @@ const LoginForm = ({ formSwitcher }) => {
 
   const { isLoading, isAuth, error } = useSelector((state) => state.login)
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
   useEffect(() => {
     sessionStorage.getItem('accessJWT') && history.push('/dashboard')
   }, [history, isAuth])
+
+  const [email, setEmail] = useState('e2@e.com')
+  const [password, setPassword] = useState('password')
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
@@ -58,7 +58,6 @@ const LoginForm = ({ formSwitcher }) => {
 
     try {
       const isAuth = await userLogin({ email, password })
-      console.log(isAuth)
 
       if (isAuth.status === 'error') {
         return dispatch(loginFail(isAuth.message))
@@ -107,9 +106,7 @@ const LoginForm = ({ formSwitcher }) => {
       </Row>
       <Row>
         <Col>
-          <a href='#!' onClick={() => formSwitcher('reset')}>
-            Forget Password?
-          </a>
+          <a href='/password-reset'>Forget Password?</a>
         </Col>
       </Row>
       <Row className='py-4'>

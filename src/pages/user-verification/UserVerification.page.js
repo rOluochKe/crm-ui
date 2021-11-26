@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Jumbotron, Spinner, Alert } from 'react-bootstrap'
+import { Card, Spinner, Alert } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
 import { userRegistrationVerification } from '../../api/userApi'
@@ -30,17 +30,19 @@ export const UserVerification = () => {
   return (
     <div className='registration-page bg-info'>
       <div className='mt-5'>
-        <Jumbotron className='form-box'>
-          {!response.status && <Spinner variant='info' animation='border' />}
+        <Card className='form-box'>
+          <Card.Body>
+            {!response.status && <Spinner variant='info' animation='border' />}
 
-          {response.status && (
-            <Alert
-              variant={response.status === 'success' ? 'success' : 'danger'}
-            >
-              {response.message}
-            </Alert>
-          )}
-        </Jumbotron>
+            {response.status && (
+              <Alert
+                variant={response.status === 'success' ? 'success' : 'danger'}
+              >
+                {response.message}
+              </Alert>
+            )}
+          </Card.Body>
+        </Card>
       </div>
     </div>
   )
