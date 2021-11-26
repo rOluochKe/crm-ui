@@ -52,7 +52,7 @@ export const fetchUser = () => {
 export const fetchNewAccessJWT = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { refreshJWT } = JSON.parse(localStorage.getItem('crmSite'))
+      const { refreshJWT } = JSON.parse(localStorage.getItem('crmapp'))
 
       if (!refreshJWT) {
         reject('Token not found!')
@@ -71,7 +71,7 @@ export const fetchNewAccessJWT = () => {
       resolve(true)
     } catch (error) {
       if (error.message === 'Request failed with status code 403') {
-        localStorage.removeItem('crmSite')
+        localStorage.removeItem('crmapp')
       }
 
       reject(false)
