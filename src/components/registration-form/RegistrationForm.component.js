@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Spinner,
+  Alert,
+} from 'react-bootstrap'
+import { newUserRegistration } from './userRegAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const initialState = {
-  name: '',
-  phone: '',
-  email: '',
-  company: '',
-  address: '',
-  password: '',
-  confirmPass: '',
+  name: 'Prem Acharya',
+  phone: '0410000000',
+  email: 'fakeemail@email.com',
+  company: 'Dented Code',
+  address: 'George st Sydney',
+  password: 'sfsd#3Dsg',
+  confirmPass: 'sfsd#3Dsg',
 }
 const passVerificationError = {
   isLenthy: false,
@@ -20,8 +30,13 @@ const passVerificationError = {
 }
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch()
   const [newUser, setNewUser] = useState(initialState)
   const [passwordError, setPasswordError] = useState(passVerificationError)
+
+  const { isLoading, status, message } = useSelector(
+    (state) => state.registration
+  )
 
   useEffect(() => {}, [newUser])
 
@@ -57,6 +72,8 @@ const RegistrationForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    // console.log(newUser);
+    dispatch(newUserRegistration(newUser))
   }
 
   return (
@@ -67,6 +84,15 @@ const RegistrationForm = () => {
         </Col>
       </Row>
       <hr />
+      <Row>
+        <Col>
+          {message && (
+            <Alert variant={status === 'success' ? 'success' : 'danger'}>
+              {message}
+            </Alert>
+          )}
+        </Col>
+      </Row>
 
       <Row>
         <Col>
@@ -79,6 +105,7 @@ const RegistrationForm = () => {
                 value={newUser.name}
                 onChange={handleOnChange}
                 placeholder='Your name'
+                required
               />
             </Form.Group>
 
@@ -90,6 +117,7 @@ const RegistrationForm = () => {
                 value={newUser.phone}
                 onChange={handleOnChange}
                 placeholder='Phone'
+                required
               />
             </Form.Group>
 
@@ -101,6 +129,7 @@ const RegistrationForm = () => {
                 value={newUser.email}
                 onChange={handleOnChange}
                 placeholder='Enter email'
+                required
               />
             </Form.Group>
 
@@ -112,6 +141,7 @@ const RegistrationForm = () => {
                 value={newUser.company}
                 onChange={handleOnChange}
                 placeholder='Company name'
+                required
               />
             </Form.Group>
 
@@ -123,6 +153,7 @@ const RegistrationForm = () => {
                 value={newUser.address}
                 onChange={handleOnChange}
                 placeholder='Full address'
+                required
               />
             </Form.Group>
 
@@ -134,6 +165,7 @@ const RegistrationForm = () => {
                 value={newUser.password}
                 onChange={handleOnChange}
                 placeholder='Password'
+                required
               />
             </Form.Group>
 
@@ -145,6 +177,7 @@ const RegistrationForm = () => {
                 value={newUser.confirmPass}
                 onChange={handleOnChange}
                 placeholder='Confirm Password'
+                required
               />
             </Form.Group>
             <Form.Text>
@@ -198,6 +231,7 @@ const RegistrationForm = () => {
             >
               Submit
             </Button>
+            {isLoading && <Spinner variant='info' animation='border' />}
           </Form>
         </Col>
       </Row>

@@ -6,6 +6,22 @@ const userProfileUrl = rootUrl + 'user'
 const logoutUrl = rootUrl + 'user/logout'
 const newAccessJWT = rootUrl + 'tokens'
 
+export const userRegistration = (frmData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.post(userProfileUrl, frmData)
+
+      resolve(res.data)
+
+      if (res.data.status === 'success') {
+        resolve(res.data)
+      }
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 export const userLogin = (frmData) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -16,7 +32,7 @@ export const userLogin = (frmData) => {
       if (res.data.status === 'success') {
         sessionStorage.setItem('accessJWT', res.data.accessJWT)
         localStorage.setItem(
-          'crmapp',
+          'crmSite',
           JSON.stringify({ refreshJWT: res.data.refreshJWT })
         )
       }
@@ -52,7 +68,7 @@ export const fetchUser = () => {
 export const fetchNewAccessJWT = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { refreshJWT } = JSON.parse(localStorage.getItem('crmapp'))
+      const { refreshJWT } = JSON.parse(localStorage.getItem('crmSite'))
 
       if (!refreshJWT) {
         reject('Token not found!')
@@ -71,7 +87,7 @@ export const fetchNewAccessJWT = () => {
       resolve(true)
     } catch (error) {
       if (error.message === 'Request failed with status code 403') {
-        localStorage.removeItem('crmapp')
+        localStorage.removeItem('crmSite')
       }
 
       reject(false)
