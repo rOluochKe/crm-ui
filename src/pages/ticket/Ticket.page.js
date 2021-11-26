@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import PageBreadcrumb from '../../components/breadcrumb/Breadcrumb.component'
-import tickets from '../../assets/data/dummy-tickets.json'
 import MessageHistory from '../../components/message-history/MessageHistory.component'
 import UpdateTicket from '../../components/update-ticket/UpdateTicket.component'
 
 // const ticket = tickets[0];
+import { fetchSingleTicket } from '../ticket-list/ticketsAction'
 
 const Ticket = () => {
   const { tId } = useParams()
+  const dispatch = useDispatch()
+
+  const { isLoading, error, selectedTicket } = useSelector(
+    (state) => state.tickets
+  )
 
   const [message, setMessage] = useState('')
-  const [ticket, setTicket] = useState('')
+  // const [ticket, setTicket] = useState('')
 
   useEffect(() => {
-    for (let i = 0; i < tickets.length; i++) {
-      // eslint-disable-next-line
-      if (tickets[i].id == tId) {
-        setTicket(tickets[i])
-        continue
-      }
-    }
-  }, [message, tId])
+    dispatch(fetchSingleTicket(tId))
+  }, [message, tId, dispatch])
 
   const handleOnChange = (e) => {
     setMessage(e.target.value)
@@ -40,17 +40,27 @@ const Ticket = () => {
         </Col>
       </Row>
       <Row>
+        <Col>
+          {isLoading && <Spinner variant='primary' animation='border' />}
+          {error && <Alert variant='danger'>{error}</Alert>}
+        </Col>
+      </Row>
+      <Row>
         <Col className='text-weight-bolder text-secondary'>
-          <div className='subject'>Subject: {ticket.subject}</div>
-          <div className='date'>Ticket Opened: {ticket.addedAt}</div>
-          <div className='status'>Status: {ticket.status}</div>
+          <div className='subject'>Subject: {selectedTicket.subject}</div>
+          <div className='date'>Ticket Opened: {selectedTicket.openAt}</div>
+          <div className='status'>Status: {selectedTicket.status}</div>
         </Col>
         <Col className='text-right'>
           <Button variant='outline-info'>Close Ticket</Button>
         </Col>
       </Row>
       <Row className='mt-4'>
-        <Col>{ticket.history && <MessageHistory msg={ticket.history} />}</Col>
+        <Col>
+          {selectedTicket.conversations && (
+            <MessageHistory msg={selectedTicket.conversations} />
+          )}
+        </Col>
       </Row>
       <hr />
 
