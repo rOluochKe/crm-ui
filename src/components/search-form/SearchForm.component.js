@@ -1,8 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { filterSerachTicket } from '../../pages/ticket-list/ticketsAction'
+
 import { Form, Row, Col } from 'react-bootstrap'
 
-const SearchForm = ({ handleOnChange, str }) => {
+const SearchForm = () => {
+  const dispatch = useDispatch()
+
+  const handleOnChange = (e) => {
+    const { value } = e.target
+
+    dispatch(filterSerachTicket(value))
+  }
+
   return (
     <div>
       <Form>
@@ -22,11 +32,6 @@ const SearchForm = ({ handleOnChange, str }) => {
       </Form>
     </div>
   )
-}
-
-SearchForm.propTypes = {
-  handleOnChange: PropTypes.func.isRequired,
-  str: PropTypes.string.isRequired,
 }
 
 export default SearchForm
