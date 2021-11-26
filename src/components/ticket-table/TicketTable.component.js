@@ -26,13 +26,13 @@ const TicketTable = () => {
       <tbody>
         {searchTicketList.length ? (
           searchTicketList.map((row) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
+            <tr key={row._id}>
+              <td>{row._id}</td>
               <td>
-                <Link to={`/ticket/${row.id}`}>{row.subject}</Link>
+                <Link to={`/ticket/${row._id}`}>{row.subject}</Link>
               </td>
               <td>{row.status}</td>
-              <td>{row.addedAt}</td>
+              <td>{row.openAt && new Date(row.openAt).toLocaleString()}</td>
             </tr>
           ))
         ) : (
