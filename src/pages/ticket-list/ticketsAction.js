@@ -25,7 +25,8 @@ export const fetchAllTickets = () => async (dispatch) => {
   dispatch(fetchTicketLoading())
   try {
     const result = await getAllTickets()
-    dispatch(fetchTicketSuccess(result.data.result))
+    result.data.result.length &&
+      dispatch(fetchTicketSuccess(result.data.result))
   } catch (error) {
     dispatch(fetchTicketFail(error.message))
   }
@@ -40,7 +41,11 @@ export const fetchSingleTicket = (_id) => async (dispatch) => {
   dispatch(fetchSingleTicketLoading())
   try {
     const result = await getSingleTicket(_id)
-    dispatch(fetchSingleTicketSuccess(result.data.result[0]))
+    dispatch(
+      fetchSingleTicketSuccess(
+        result.data.result.length && result.data.result[0]
+      )
+    )
   } catch (error) {
     dispatch(fetchSingleTicketFail(error.message))
   }
@@ -70,7 +75,6 @@ export const closeTicket = (_id) => async (dispatch) => {
   dispatch(closeTicketLoading())
   try {
     const result = await updateTicketStatusClosed(_id)
-    console.log(result)
     if (result.status === 'error') {
       return dispatch(closeTicketFail(result.message))
     }
