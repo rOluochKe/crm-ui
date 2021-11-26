@@ -4,6 +4,7 @@ import { Form, Card, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
 
 import { openNewTicket } from './addTicketAction'
 import { shortText } from '../../utils/validation'
+import { restSuccessMSg } from './addTicketSlicer'
 
 import './add-ticket-form.style.css'
 
@@ -33,7 +34,11 @@ const AddTicketForm = () => {
   const [frmData, setFrmData] = useState(initialFrmDt)
   const [frmDataErro, setFrmDataErro] = useState(initialFrmError)
 
-  useEffect(() => {}, [frmData, frmDataErro])
+  useEffect(() => {
+    return () => {
+      successMsg && dispatch(restSuccessMSg())
+    }
+  }, [dispatch, frmData, frmDataErro])
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
@@ -85,7 +90,7 @@ const AddTicketForm = () => {
                 required
               />
               <Form.Text className='text-danger'>
-                {frmDataErro.subject && 'SUbject is required!'}
+                {frmDataErro.subject && 'Subject is required!'}
               </Form.Text>
             </Col>
           </Form.Group>

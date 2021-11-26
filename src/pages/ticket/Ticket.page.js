@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
@@ -8,17 +8,21 @@ import UpdateTicket from '../../components/update-ticket/UpdateTicket.component'
 
 // const ticket = tickets[0];
 import { fetchSingleTicket, closeTicket } from '../ticket-list/ticketsAction'
+import { resetResponseMsg } from '../ticket-list/ticketsSlice'
 
 const Ticket = () => {
   const { tId } = useParams()
   const dispatch = useDispatch()
-
   const { isLoading, error, selectedTicket, replyMsg, replyTicketError } =
     useSelector((state) => state.tickets)
 
   useEffect(() => {
     dispatch(fetchSingleTicket(tId))
-  }, [tId, dispatch])
+
+    return () => {
+      ;(replyMsg || replyTicketError) && dispatch(resetResponseMsg())
+    }
+  }, [tId, dispatch, replyMsg, replyTicketError])
 
   return (
     <Container>
@@ -31,6 +35,9 @@ const Ticket = () => {
         <Col>
           {isLoading && <Spinner variant='primary' animation='border' />}
           {error && <Alert variant='danger'>{error}</Alert>}
+          {replyTicketError && (
+            <Alert variant='danger'>{replyTicketError}</Alert>
+          )}
           {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
         </Col>
       </Row>

@@ -5,7 +5,6 @@ const initialState = {
   error: '',
   successMsg: '',
 }
-
 const newTicketSlice = createSlice({
   name: 'newTicket',
   initialState,
@@ -21,9 +20,17 @@ const newTicketSlice = createSlice({
       state.isLoading = true
       state.error = payload
     },
+    restSuccessMSg: (state) => {
+      state.isLoading = true
+      state.successMsg = ''
+    },
   },
 })
 
-export const { openNewTicketPending, openNewTicketSuccess, openNewTicketFail } =
-  newTicketSlice.actions
+export const {
+  openNewTicketPending,
+  openNewTicketSuccess,
+  openNewTicketFail,
+  restSuccessMSg,
+} = newTicketSlice.actions
 export default newTicketSlice.reducer
