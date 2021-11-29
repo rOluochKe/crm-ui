@@ -5,6 +5,7 @@ const initialState = {
   error: '',
   successMsg: '',
 }
+
 const newTicketSlice = createSlice({
   name: 'newTicket',
   initialState,

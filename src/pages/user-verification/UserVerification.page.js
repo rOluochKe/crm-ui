@@ -10,6 +10,7 @@ const initialResponse = {
   status: '',
   message: '',
 }
+
 export const UserVerification = () => {
   const { _id, email } = useParams()
   const dt = { _id, email }
@@ -23,6 +24,7 @@ export const UserVerification = () => {
     }
 
     !response.status && apiCall()
+    // eslint-disable-next-line
   }, [response])
 
   //call api and send the _id to verify user

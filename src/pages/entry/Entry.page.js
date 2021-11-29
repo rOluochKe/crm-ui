@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+
 import { Card } from 'react-bootstrap'
-import LoginForm from '../../components/login/Login.component'
-import PasswordReset from '../../components/password-reset/PasswordReset.component'
+import { LoginForm } from '../../components/login/Login.component'
+import { ResetPassword } from '../../components/password-reset/PasswordReset.comp'
 
 import './entry.style.css'
 
@@ -17,7 +18,7 @@ import './entry.style.css'
 // [] Add reducer through Redux-toolkit to handle the network status and provide the feedback to the user
 // [] Send email, OTP and new password to update the password.
 
-const Entry = () => {
+export const Entry = () => {
   const [frmLoad, setFrmLoad] = useState('login')
 
   const handleOnResetSubmit = (e) => {
@@ -35,7 +36,7 @@ const Entry = () => {
           {frmLoad === 'login' && <LoginForm formSwitcher={formSwitcher} />}
 
           {frmLoad === 'rest' && (
-            <PasswordReset
+            <ResetPassword
               // handleOnChange={handleOnChange}
               handleOnResetSubmit={handleOnResetSubmit}
               formSwitcher={formSwitcher}
@@ -47,5 +48,3 @@ const Entry = () => {
     </div>
   )
 }
-
-export default Entry

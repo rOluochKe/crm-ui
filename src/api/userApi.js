@@ -22,6 +22,7 @@ export const userRegistration = (frmData) => {
     }
   })
 }
+
 export const userRegistrationVerification = (frmData) => {
   return new Promise(async (resolve, reject) => {
     try {

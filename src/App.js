@@ -2,21 +2,19 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import './App.css'
-
-import PrivateRoute from './components/private-route/PrivateRoute.component'
-
-import Ticket from './pages/ticket/Ticket.page'
-import TicketLists from './pages/ticket-list/TicketLists.page'
-import Dashboard from './pages/dashboard/Dashboard.page'
+import { PrivateRoute } from './components/private-route/PrivateRoute.component'
+import { Dashboard } from './pages/dashboard/Dashboard.page'
 import { UserVerification } from './pages/user-verification/UserVerification.page'
-import Entry from './pages/entry/Entry.page'
+import { Entry } from './pages/entry/Entry.page'
 import { PasswordOtpForm } from './pages/password-reset/PasswordOtpForm.page'
 import { Registration } from './pages/registration/Registration.page'
-import AddTicket from './pages/new-ticket/AddTicket.page'
+import { AddTicket } from './pages/new-ticket/AddTicket.page'
+import { TicketLists } from './pages/ticket-list/TicketLists.page'
+import { Ticket } from './pages/ticket/Ticket.page'
 
-const App = () => {
+function App() {
   return (
-    <div className='app'>
+    <div className='App'>
       <Router>
         <Switch>
           <Route exact path='/'>
@@ -38,11 +36,11 @@ const App = () => {
           <PrivateRoute exact path='/add-ticket'>
             <AddTicket />
           </PrivateRoute>
-          <PrivateRoute exact path='/tickets'>
-            <TicketLists />
-          </PrivateRoute>
           <PrivateRoute exact path='/ticket/:tId'>
             <Ticket />
+          </PrivateRoute>
+          <PrivateRoute exact path='/tickets'>
+            <TicketLists />
           </PrivateRoute>
 
           <Route path='*'>

@@ -12,14 +12,15 @@ import { newUserRegistration } from './userRegAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 const initialState = {
-  name: 'Prem Acharya',
-  phone: '0410000000',
-  email: 'fakeemail@email.com',
-  company: 'Dented Code',
-  address: 'George st Sydney',
-  password: 'sfsd#3Dsg',
-  confirmPass: 'sfsd#3Dsg',
+  name: '',
+  phone: '',
+  email: '',
+  company: '',
+  address: '',
+  password: '',
+  confirmPass: '',
 }
+
 const passVerificationError = {
   isLenthy: false,
   hasUpper: false,
@@ -90,7 +91,7 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className='text-info'>User Registration</h1>
+          <h1 className='text-info'>Register Account</h1>
         </Col>
       </Row>
       <hr />
@@ -107,7 +108,7 @@ const RegistrationForm = () => {
       <Row>
         <Col>
           <Form onSubmit={handleOnSubmit}>
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Full Name</Form.Label>
               <Form.Control
                 type='text'
@@ -119,7 +120,7 @@ const RegistrationForm = () => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Phone</Form.Label>
               <Form.Control
                 type='number'
@@ -131,7 +132,7 @@ const RegistrationForm = () => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type='email'
@@ -143,7 +144,7 @@ const RegistrationForm = () => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Company name</Form.Label>
               <Form.Control
                 type='text'
@@ -155,7 +156,7 @@ const RegistrationForm = () => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Address</Form.Label>
               <Form.Control
                 type='text'
@@ -167,7 +168,7 @@ const RegistrationForm = () => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type='password'
@@ -179,7 +180,7 @@ const RegistrationForm = () => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type='password'

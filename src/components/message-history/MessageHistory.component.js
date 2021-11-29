@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import './message-history.style.css'
 
-const MessageHistory = ({ msg }) => {
+export const MessageHistory = ({ msg }) => {
   if (!msg) return null
 
   return msg.map((row, i) => (
@@ -22,5 +21,3 @@ const MessageHistory = ({ msg }) => {
 MessageHistory.propTypes = {
   msg: PropTypes.array.isRequired,
 }
-
-export default MessageHistory

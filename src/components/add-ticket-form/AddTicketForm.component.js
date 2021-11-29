@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, Card, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
-
 import { openNewTicket } from './addTicketAction'
 import { shortText } from '../../utils/validation'
 import { restSuccessMSg } from './addTicketSlicer'
@@ -20,7 +19,7 @@ const initialFrmError = {
   message: false,
 }
 
-const AddTicketForm = () => {
+export const AddTicketForm = () => {
   const dispatch = useDispatch()
 
   const {
@@ -38,6 +37,7 @@ const AddTicketForm = () => {
     return () => {
       successMsg && dispatch(restSuccessMSg())
     }
+    // eslint-disable-next-line
   }, [dispatch, frmData, frmDataErro])
 
   const handleOnChange = (e) => {
@@ -75,14 +75,14 @@ const AddTicketForm = () => {
           {isLoading && <Spinner variant='primary' animation='border' />}
         </div>
         <Form autoComplete='off' onSubmit={handleOnSubmit}>
-          <Form.Group as={Row}>
+          <Form.Group as={Row} className='mb-2'>
             <Form.Label column sm={3}>
               Subject
             </Form.Label>
             <Col sm={9}>
               <Form.Control
                 name='subject'
-                value={frmDt.subject}
+                value={frmData.subject}
                 // minLength="3"
                 maxLength='100'
                 onChange={handleOnChange}
@@ -90,11 +90,11 @@ const AddTicketForm = () => {
                 required
               />
               <Form.Text className='text-danger'>
-                {frmDataErro.subject && 'Subject is required!'}
+                {frmDataErro.subject && 'SUbject is required!'}
               </Form.Text>
             </Col>
           </Form.Group>
-          <Form.Group as={Row}>
+          <Form.Group as={Row} className='mb-2'>
             <Form.Label column sm={3}>
               Issue Found
             </Form.Label>
@@ -102,31 +102,29 @@ const AddTicketForm = () => {
               <Form.Control
                 type='date'
                 name='issueDate'
-                value={frmDt.issueDate}
+                value={frmData.issueDate}
                 onChange={handleOnChange}
                 required
               />
             </Col>
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
+          <Form.Group className='mb-2'>
+            <Form.Label>Message</Form.Label>
             <Form.Control
               as='textarea'
               name='message'
               rows='5'
-              value={frmDt.message}
+              value={frmData.message}
               onChange={handleOnChange}
               required
             />
           </Form.Group>
 
-          <Button type='submit' variant='info'>
-            Login
+          <Button type='submit' variant='info' block>
+            Open Ticket
           </Button>
         </Form>
       </Card.Body>
     </Card>
   )
 }
-
-export default AddTicketForm

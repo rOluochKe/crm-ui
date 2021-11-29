@@ -4,7 +4,7 @@ import { filterSerachTicket } from '../../pages/ticket-list/ticketsAction'
 
 import { Form, Row, Col } from 'react-bootstrap'
 
-const SearchForm = () => {
+export const SearchForm = () => {
   const dispatch = useDispatch()
 
   const handleOnChange = (e) => {
@@ -24,7 +24,6 @@ const SearchForm = () => {
             <Form.Control
               name='searchStr'
               onChange={handleOnChange}
-              value={str}
               placeholder='Search ...'
             />
           </Col>
@@ -33,5 +32,3 @@ const SearchForm = () => {
     </div>
   )
 }
-
-export default SearchForm

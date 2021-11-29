@@ -1,11 +1,9 @@
 import React from 'react'
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div className='text-center copy-right'>
-      &copy; CRM all right reserved - 2021.
+      &copy; CRM App all right reserved - 2021.
     </div>
   )
 }
-
-export default Footer

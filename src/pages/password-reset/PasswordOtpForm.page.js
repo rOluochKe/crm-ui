@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { Jumbotron } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { ResetPassword } from '../../components/password-reset/PasswordReset.comp'
 import UpdatePasswordForm from '../../components/password-reset/UpdatePasswordForm.comp'
 
@@ -24,12 +24,14 @@ export const PasswordOtpForm = () => {
 
   return (
     <div className='entry-page bg-info'>
-      <Jumbotron className='form-box'>
-        {showUpdatePassForm ? <UpdatePasswordForm /> : <ResetPassword />}
-        <div className='text-center'>
-          <a href='/'>Login Now</a>
-        </div>
-      </Jumbotron>
+      <Card className='form-box'>
+        <Card.Body>
+          {showUpdatePassForm ? <UpdatePasswordForm /> : <ResetPassword />}
+          <div className='text-center'>
+            <a href='/'>Login Now</a>
+          </div>
+        </Card.Body>
+      </Card>
     </div>
   )
 }

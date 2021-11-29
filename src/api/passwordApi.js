@@ -9,7 +9,7 @@ export const reqPasswordOtp = (email) => {
     try {
       const { data } = await axios.post(otpReqUrl, { email })
 
-      console.log(data)
+      // console.log(data)
       resolve(data)
     } catch (error) {
       reject(error)
@@ -22,7 +22,7 @@ export const updateUserPassword = (passObj) => {
     try {
       const { data } = await axios.patch(updatePassUrl, passObj)
 
-      console.log(data)
+      // console.log(data)
       resolve(data)
     } catch (error) {
       reject(error)

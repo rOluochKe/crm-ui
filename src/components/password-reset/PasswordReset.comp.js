@@ -12,7 +12,7 @@ import {
   Spinner,
 } from 'react-bootstrap'
 
-const PasswordReset = () => {
+export const ResetPassword = () => {
   const dispatch = useDispatch()
 
   const [email, setEmail] = useState('')
@@ -46,7 +46,7 @@ const PasswordReset = () => {
           {isLoading && <Spinner variant='primary' animation='border' />}
 
           <Form autoComplete='off' onSubmit={handleOnResetSubmit}>
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type='email'
@@ -66,5 +66,3 @@ const PasswordReset = () => {
     </Container>
   )
 }
-
-export default PasswordReset

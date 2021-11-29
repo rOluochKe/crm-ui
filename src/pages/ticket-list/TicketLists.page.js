@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux'
 import { fetchAllTickets } from './ticketsAction'
 
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.component'
+import { SearchForm } from '../../components/search-form/SearchForm.component'
+import { TicketTable } from '../../components/ticket-table/TicketTable.component'
+
 import { Link } from 'react-router-dom'
 
-import PageBreadcrumb from '../../components/breadcrumb/Breadcrumb.component'
-import SearchForm from '../../components/search-form/SearchForm.component'
-import TicketTable from '../../components/ticket-table/TicketTable.component'
-
-const TicketLists = () => {
+export const TicketLists = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -42,5 +42,3 @@ const TicketLists = () => {
     </Container>
   )
 }
-
-export default TicketLists

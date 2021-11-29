@@ -16,20 +16,21 @@ import { loginPending, loginSuccess, loginFail } from './loginSlice'
 import { userLogin } from '../../api/userApi'
 import { getUserProfile } from '../../pages/dashboard/userAction'
 
-const LoginForm = ({ formSwitcher }) => {
+export const LoginForm = ({ formSwitcher }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   let location = useLocation()
 
   const { isLoading, isAuth, error } = useSelector((state) => state.login)
-  let { from } = location.state || { from: { pathname: '/' } }
+  let { from } = location.state || { from: { pathname: '/dashboard' } }
 
   useEffect(() => {
     sessionStorage.getItem('accessJWT') && history.replace(from)
+    // eslint-disable-next-line
   }, [history, isAuth])
 
-  const [email, setEmail] = useState('e2@e.com')
-  const [password, setPassword] = useState('password#1F')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
@@ -76,11 +77,11 @@ const LoginForm = ({ formSwitcher }) => {
     <Container>
       <Row>
         <Col>
-          <h1 className='text-info text-center'>Client Login</h1>
+          <h1 className='text-info text-center'>Login</h1>
           <hr />
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form autoComplete='off' onSubmit={handleOnSubmit}>
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type='email'
@@ -91,7 +92,7 @@ const LoginForm = ({ formSwitcher }) => {
                 required
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className='mb-2'>
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type='password'
@@ -127,5 +128,3 @@ const LoginForm = ({ formSwitcher }) => {
 LoginForm.propTypes = {
   formSwitcher: PropTypes.func.isRequired,
 }
-
-export default LoginForm

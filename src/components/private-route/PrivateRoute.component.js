@@ -6,7 +6,7 @@ import { getUserProfile } from '../../pages/dashboard/userAction'
 
 import { fetchNewAccessJWT } from '../../api/userApi'
 
-import { DefaultLayout } from '../../layout/DefaultLayout'
+import { DefaultLayout } from '../../layout/Default.layout'
 
 export const PrivateRoute = ({ children, ...rest }) => {
   const dispatch = useDispatch()

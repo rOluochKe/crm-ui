@@ -1,8 +1,8 @@
 import React from 'react'
-import Footer from './partial/Footer.component'
-import Header from './partial/Header.component'
+import { Header } from './partial/Header.component'
+import { Footer } from './partial/Footer.component'
 
-const DefaultLayout = ({ children }) => {
+export const DefaultLayout = ({ children }) => {
   return (
     <div className='default-layout'>
       <header className='header mb-2'>
@@ -17,5 +17,3 @@ const DefaultLayout = ({ children }) => {
     </div>
   )
 }
-
-export default DefaultLayout

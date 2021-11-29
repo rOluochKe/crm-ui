@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import PageBreadcrumb from '../../components/breadcrumb/Breadcrumb.component'
-import AddTicketForm from '../../components/add-ticket-form/AddTicketForm.component'
+import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.component'
+import { AddTicketForm } from '../../components/add-ticket-form/AddTicketForm.component'
 
-const AddTicket = () => {
+export const AddTicket = () => {
   return (
     <Container>
       <Row>
@@ -20,5 +20,3 @@ const AddTicket = () => {
     </Container>
   )
 }
-
-export default AddTicket

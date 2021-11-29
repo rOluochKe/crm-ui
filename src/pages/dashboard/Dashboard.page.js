@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { TicketTable } from '../../components/ticket-table/TicketTable.component'
+import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.component'
 import { Link } from 'react-router-dom'
-import TicketTable from '../../components/ticket-table/TicketTable.component'
-// import tickets from '../../assets/data/dummy-tickets.json'
-import PageBreadcrumb from '../../components/breadcrumb/Breadcrumb.component'
 
 import { fetchAllTickets } from '../ticket-list/ticketsAction'
 
-const Dashboard = () => {
+export const Dashboard = () => {
   const dispatch = useDispatch()
   const { tickets } = useSelector((state) => state.tickets)
 
@@ -20,7 +19,6 @@ const Dashboard = () => {
 
   const pendingTickets = tickets.filter((row) => row.status !== 'Closed')
   const totlatTickets = tickets.length
-
   return (
     <Container>
       <Row>
@@ -59,5 +57,3 @@ const Dashboard = () => {
     </Container>
   )
 }
-
-export default Dashboard

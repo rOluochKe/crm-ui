@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
-import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.comp'
-import { MessageHistory } from '../../components/message-history/MessageHistory.comp'
-import { UpdateTicket } from '../../components/update-ticket/UpdateTicket.comp'
+import { PageBreadcrumb } from '../../components/breadcrumb/Breadcrumb.component'
+import { MessageHistory } from '../../components/message-history/MessageHistory.component'
+import { UpdateTicket } from '../../components/update-ticket/UpdateTicket.component'
 import { useParams } from 'react-router-dom'
 
 import { fetchSingleTicket, closeTicket } from '../ticket-list/ticketsAction'
 import { resetResponseMsg } from '../ticket-list/ticketsSlice'
 
-const Ticket = () => {
+export const Ticket = () => {
   const { tId } = useParams()
   const dispatch = useDispatch()
   const { isLoading, error, selectedTicket, replyMsg, replyTicketError } =
@@ -78,5 +78,3 @@ const Ticket = () => {
     </Container>
   )
 }
-
-export default Ticket

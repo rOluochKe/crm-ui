@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 
 import { replyOnTicket } from '../../pages/ticket-list/ticketsAction'
 
-const UpdateTicket = ({ _id }) => {
+export const UpdateTicket = ({ _id }) => {
   const dispatch = useDispatch()
   const {
     user: { name },
@@ -30,7 +30,6 @@ const UpdateTicket = ({ _id }) => {
 
   return (
     <div>
-      {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
       <Form onSubmit={handleOnSubmit}>
         <Form.Label>Reply</Form.Label>
         <Form.Text>
@@ -56,5 +55,3 @@ const UpdateTicket = ({ _id }) => {
 UpdateTicket.propTypes = {
   _id: PropTypes.string.isRequired,
 }
-
-export default UpdateTicket
