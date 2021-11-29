@@ -20,26 +20,26 @@ function App() {
           <Route exact path='/'>
             <Entry />
           </Route>
-          <Route exact path='/registration'>
+          <Route path='/registration'>
             <Registration />
           </Route>
-          <Route exact path='/password-reset'>
+          <Route path='/password-reset'>
             <PasswordOtpForm />
           </Route>
-          <Route exact path='/verification/:_id/:email'>
+          <Route path='/verification/:_id/:email'>
             <UserVerification />
           </Route>
 
-          <PrivateRoute exact path='/dashboard'>
+          <PrivateRoute path='/dashboard'>
             <Dashboard />
           </PrivateRoute>
-          <PrivateRoute exact path='/add-ticket'>
+          <PrivateRoute path='/add-ticket'>
             <AddTicket />
           </PrivateRoute>
-          <PrivateRoute exact path='/ticket/:tId'>
+          <PrivateRoute path='/ticket/:tId'>
             <Ticket />
           </PrivateRoute>
-          <PrivateRoute exact path='/tickets'>
+          <PrivateRoute path='/tickets'>
             <TicketLists />
           </PrivateRoute>
 
